@@ -1,7 +1,7 @@
 From: PaperShield workflow <papershield@example.com>
 To: maria.test@example.com
 Subject: PaperShield: Action needed
-Date: Fri, 09 Oct 2026 00:12:44 GMT
+Date: Fri, 09 Oct 2026 02:50:52 GMT
 Content-Type: text/plain; charset=utf-8
 
 Hello,
@@ -14,7 +14,7 @@ Pay $45.50 by October 30, 2026.
 Decided by fixed rule R7 and checked by a person.
 A calendar reminder was made for October 30, 2026 (2 days before, you get an alert).
 
-Short AI summary (you agreed to this): This is your utility bill from Valley Light & Water Co. for electricity and water services. The total amount of $45.50 is due by October 30, 2026.
+Short AI summary (you agreed to this): This is a bill from Valley Light & Water Co. for your electric and water services. The total amount of $45.50 is due by October 30, 2026.
 
 PaperShield gives information, not financial or legal advice.
 (Synthetic test message.)

@@ -18,7 +18,7 @@ const pendingFor = async (pred) => { for (let i = 0; i < 60; i++) { const l = aw
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 1000, height: 760 }, recordVideo: { dir: tmp, size: { width: 1000, height: 760 } } });
   // the smudged letter goes in first, in the background, so the AI has read it by the time we show it
-  await fetch('http://localhost:5678/webhook/papershield-letter-in', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...smudged, caseId: 'video-ai-unsure-' + Date.now().toString(36) }) });
+  await fetch('http://localhost:5678/webhook/papershield-letter-in', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...smudged, email: 'harold.video' + Date.now().toString(36) + '@example.com', caseId: 'video-ai-unsure-' + Date.now().toString(36) }) });
   const p = await ctx.newPage(); const t0 = Date.now();
   await p.goto('http://localhost:5678/form/papershield-letter'); await p.waitForTimeout(800);
   await cap(p, 'PaperShield on n8n. A letter comes in through this n8n form. (Synthetic letter, made-up address.)'); await wait(3500);

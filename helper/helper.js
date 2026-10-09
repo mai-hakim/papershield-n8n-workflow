@@ -58,7 +58,7 @@ async function extract({ letterText, wantSummary, simulate }) {
     `For sender, amount and due date, also copy the exact words from the letter into the *_quote field. If a value is smudged, unclear or missing, use null and list the field in unsure_fields.\n` +
     (wantSummary ? 'The reader agreed to an AI summary: fill "summary" with two plain sentences.\n' : 'Leave "summary" null.\n') + '\nLETTER:\n' + letterText;
   let lastErr;
-  for (const model of ['gemini-3.5-flash', 'gemini-3.5-flash-lite']) for (let a = 0; a < 2; a++) {
+  for (const model of ['gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-3.5-flash']) for (let a = 0; a < 2; a++) {
     try {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': k },
         body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json', responseSchema: FACT_SCHEMA } }) });

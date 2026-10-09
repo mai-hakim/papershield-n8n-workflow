@@ -29,7 +29,7 @@ An **AI summary** of the letter is only written if the sender ticked "Yes" on th
 ![Architecture](docs/architecture.png)
 
 ## Tools (all free)
-n8n 2.42.5 (self-hosted on a laptop with `npx n8n`), Node.js (helper service, no extra packages), Google Gemini free tier (`gemini-3.5-flash`, with `gemini-3.5-flash-lite` as fallback), Playwright (demo video and canvas images).
+n8n 2.42.5 (self-hosted on a laptop with `npx n8n`), Node.js (helper service, no extra packages), Google Gemini free tier (`gemini-3.1-flash-lite`, with `gemini-3.6-flash` and `gemini-3.5-flash` as fallbacks; each free model allows about 500 requests a day), Playwright (demo video and canvas images).
 
 ## Error handling
 | Problem | What happens |
@@ -58,6 +58,7 @@ n8n 2.42.5 (self-hosted on a laptop with `npx n8n`), Node.js (helper service, no
 - First run: 7 of 7 passed. But reading the emails showed a real bug: case 5 said "Respond by null." The tests only checked statuses, so they missed it. I fixed the message ("There is a date on this letter, but it could not be read clearly…"), switched to readable dates, and added a test check that fails if an email contains "null", "undefined" or a raw `2026-10-30` date.
 - Second run, right after restarting n8n: 6 of 7. Case 1's email still had the old wording, so the restarted n8n seems to have served the previous workflow version once. I did not fully confirm the cause.
 - Third run: **7 of 7**.
+- Fourth run (October 8, evening), after switching the AI model to `gemini-3.1-flash-lite`, because the earlier model had used up its free daily limit during Project A: **7 of 7**. With the faster model, each case took 2 to 11 seconds.
 
 A real sample run is in [docs/sample-run/](docs/sample-run/): the log sheet, errors sheet, emails, calendar file and `test-results-latest.json`.
 
@@ -77,7 +78,7 @@ Approval pages: http://127.0.0.1:3457/pending · sheets and outbox: http://127.0
 ## Limits (honest)
 - Synthetic letters only: 7 test cases, not real mail. The AI's accuracy on real letters has not been measured.
 - "Sheets" are CSV files and "email" is a local outbox. A real version would use Google Sheets and Gmail with proper accounts.
-- The free Gemini tier is slow when busy: in the last test run, the cases with an AI step took 21–32 seconds from start to end. It also has daily limits.
+- The free Gemini tier has daily limits (about 500 requests per model per day), and it is slower when busy: one run had AI cases taking 21 to 32 seconds, while the last run took 2 to 11 seconds.
 - One reviewer, no login on the approval page (it only listens on this laptop, 127.0.0.1).
 
 ## What I would do in production

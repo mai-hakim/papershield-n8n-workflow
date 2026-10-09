@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-10-09T00:13:36.941Z",
+  "ranAt": "2026-10-09T02:51:17.083Z",
   "passed": 7,
   "total": 7,
   "results": [
@@ -23,8 +23,8 @@
         "errorsRows": 0,
         "errorStage": "",
         "human": "approve",
-        "emailText": "Hello,\n\nPaperShield read your letter.\n\nResult: Action needed\nPay $45.50 by October 30, 2026.\n\nDecided by fixed rule R7 and checked by a person.\nA calendar reminder was made for October 30, 2026 (2 days before, you get an alert).\n\nShort AI summary (you agreed to this): This is your utility bill from Valley Light & Water Co. for electricity and water services. The total amount of $45.50 is due by October 30, 2026.\n\nPaperShield gives information, not financial or legal advice.\n(Synthetic test message.)\r\n",
-        "seconds": 32
+        "emailText": "Hello,\n\nPaperShield read your letter.\n\nResult: Action needed\nPay $45.50 by October 30, 2026.\n\nDecided by fixed rule R7 and checked by a person.\nA calendar reminder was made for October 30, 2026 (2 days before, you get an alert).\n\nShort AI summary (you agreed to this): This is a bill from Valley Light & Water Co. for your electric and water services. The total amount of $45.50 is due by October 30, 2026.\n\nPaperShield gives information, not financial or legal advice.\n(Synthetic test message.)\r\n",
+        "seconds": 11
       },
       "pass": true,
       "failedChecks": []
@@ -119,7 +119,7 @@
         "errorStage": "",
         "human": "approve",
         "emailText": "Hello,\n\nPaperShield read your letter.\n\nResult: Action needed (not sure — please check)\nThere is a date on this letter, but it could not be read clearly. Check the letter with someone you trust before the date.\n\nDecided by fixed rule R8 and checked by a person.\nSome words were hard to read (amount_owed, due_date). Please check the letter yourself or with someone you trust.\n\nPaperShield gives information, not financial or legal advice.\n(Synthetic test message.)\r\n",
-        "seconds": 21
+        "seconds": 5
       },
       "pass": true,
       "failedChecks": []
@@ -160,14 +160,14 @@
         "webhook": 200,
         "status": "rejected-not-sent",
         "outcome": "scam",
-        "aiUnsure": "false",
+        "aiUnsure": "true",
         "calendar": false,
         "email": false,
         "errorsRows": 0,
         "errorStage": "",
         "human": "reject",
         "emailText": "",
-        "seconds": 21
+        "seconds": 8
       },
       "pass": true,
       "failedChecks": []
