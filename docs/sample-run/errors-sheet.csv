@@ -1,0 +1,4 @@
+time,case_id,letter_id,email,stage,error
+2026-10-09T00:12:46.501Z,2-missing-data-runmv07nw11,,maria.test@example.com,check-input,missing data: no letter text
+2026-10-09T00:12:48.812Z,3-wrong-data-runmv07nw11,,maria.example.com,check-input,"wrong data: ""maria.example.com"" is not an email address"
+2026-10-09T00:13:14.009Z,6-tool-down-runmv07nw11,0c26bfb0d6491564,grace.test@example.com,ai-extract,AI service did not answer (tool down). The letter was not decided.

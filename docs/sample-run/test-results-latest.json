@@ -1,0 +1,176 @@
+{
+  "ranAt": "2026-10-09T00:13:36.941Z",
+  "passed": 7,
+  "total": 7,
+  "results": [
+    {
+      "id": "1-normal",
+      "title": "Normal bill: AI extracts, rules say Action needed, human approves, reminder + email",
+      "expect": {
+        "status": "sent",
+        "outcome": "action",
+        "aiUnsure": false,
+        "calendar": true,
+        "email": true
+      },
+      "got": {
+        "webhook": 200,
+        "status": "sent",
+        "outcome": "action",
+        "aiUnsure": "false",
+        "calendar": true,
+        "email": true,
+        "errorsRows": 0,
+        "errorStage": "",
+        "human": "approve",
+        "emailText": "Hello,\n\nPaperShield read your letter.\n\nResult: Action needed\nPay $45.50 by October 30, 2026.\n\nDecided by fixed rule R7 and checked by a person.\nA calendar reminder was made for October 30, 2026 (2 days before, you get an alert).\n\nShort AI summary (you agreed to this): This is your utility bill from Valley Light & Water Co. for electricity and water services. The total amount of $45.50 is due by October 30, 2026.\n\nPaperShield gives information, not financial or legal advice.\n(Synthetic test message.)\r\n",
+        "seconds": 32
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "2-missing-data",
+      "title": "Missing data: the letter text is empty",
+      "expect": {
+        "status": "error-bad-input",
+        "errorStage": "check-input",
+        "email": false
+      },
+      "got": {
+        "webhook": 200,
+        "status": "error-bad-input",
+        "outcome": "",
+        "aiUnsure": "",
+        "calendar": false,
+        "email": false,
+        "errorsRows": 1,
+        "errorStage": "check-input",
+        "human": "-",
+        "emailText": "",
+        "seconds": 2
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "3-wrong-data",
+      "title": "Wrong data: the email address is not an email",
+      "expect": {
+        "status": "error-bad-input",
+        "errorStage": "check-input",
+        "email": false
+      },
+      "got": {
+        "webhook": 200,
+        "status": "error-bad-input",
+        "outcome": "",
+        "aiUnsure": "",
+        "calendar": false,
+        "email": false,
+        "errorsRows": 1,
+        "errorStage": "check-input",
+        "human": "-",
+        "emailText": "",
+        "seconds": 2
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "4-duplicate",
+      "title": "Duplicate: the same bill from the same person arrives again",
+      "expect": {
+        "status": "duplicate-skipped",
+        "email": false
+      },
+      "got": {
+        "webhook": 200,
+        "status": "duplicate-skipped",
+        "outcome": "",
+        "aiUnsure": "",
+        "calendar": false,
+        "email": false,
+        "errorsRows": 0,
+        "errorStage": "",
+        "human": "-",
+        "emailText": "",
+        "seconds": 2
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "5-ai-unsure",
+      "title": "AI unsure: amount and date are smudged; rules + human still in control",
+      "expect": {
+        "status": "sent",
+        "aiUnsure": true,
+        "email": true
+      },
+      "got": {
+        "webhook": 200,
+        "status": "sent",
+        "outcome": "action",
+        "aiUnsure": "true",
+        "calendar": false,
+        "email": true,
+        "errorsRows": 0,
+        "errorStage": "",
+        "human": "approve",
+        "emailText": "Hello,\n\nPaperShield read your letter.\n\nResult: Action needed (not sure — please check)\nThere is a date on this letter, but it could not be read clearly. Check the letter with someone you trust before the date.\n\nDecided by fixed rule R8 and checked by a person.\nSome words were hard to read (amount_owed, due_date). Please check the letter yourself or with someone you trust.\n\nPaperShield gives information, not financial or legal advice.\n(Synthetic test message.)\r\n",
+        "seconds": 21
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "6-tool-down",
+      "title": "Tool down: the AI service does not answer",
+      "expect": {
+        "status": "error-ai-down",
+        "errorStage": "ai-extract",
+        "email": true
+      },
+      "got": {
+        "webhook": 200,
+        "status": "error-ai-down",
+        "outcome": "",
+        "aiUnsure": "",
+        "calendar": false,
+        "email": true,
+        "errorsRows": 1,
+        "errorStage": "ai-extract",
+        "human": "-",
+        "emailText": "Hello,\n\nOur reading service is not available right now, so we did not decide anything about your letter. A person will look at it. Please do not act on the letter until you hear back, and do not pay anyone who calls you about it.\n\nPaperShield (synthetic test message)\r\n",
+        "seconds": 2
+      },
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "7-human-rejects",
+      "title": "Human rejects: scam letter; the person reviewing says do not send",
+      "expect": {
+        "status": "rejected-not-sent",
+        "outcome": "scam",
+        "email": false
+      },
+      "got": {
+        "webhook": 200,
+        "status": "rejected-not-sent",
+        "outcome": "scam",
+        "aiUnsure": "false",
+        "calendar": false,
+        "email": false,
+        "errorsRows": 0,
+        "errorStage": "",
+        "human": "reject",
+        "emailText": "",
+        "seconds": 21
+      },
+      "pass": true,
+      "failedChecks": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="Verdana, sans-serif" font-size="14">
+  <title>PaperShield letter workflow on n8n</title>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0F6B6B"/></marker></defs>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#0F2A30">PaperShield on n8n: AI reads facts, rules decide, a person approves</text>
+  <g text-anchor="middle" fill="#0F2A30">
+    <rect x="20" y="70" width="140" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="90" y="98" font-weight="bold">1. Letter in</text><text x="90" y="120" font-size="12">n8n form / webhook</text>
+    <rect x="190" y="70" width="140" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="260" y="98" font-weight="bold">2. Check input</text><text x="260" y="120" font-size="12">missing / wrong data</text>
+    <rect x="360" y="70" width="140" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="430" y="98" font-weight="bold">3. Duplicate?</text><text x="430" y="120" font-size="12">same person + letter</text>
+    <rect x="530" y="70" width="140" height="70" rx="12" fill="#fff" stroke="#6A3FA0" stroke-width="3"/><text x="600" y="98" font-weight="bold">4. AI: facts only</text><text x="600" y="120" font-size="12">Gemini + quote check</text>
+    <rect x="700" y="70" width="140" height="70" rx="12" fill="#fff" stroke="#B42318" stroke-width="3"/><text x="770" y="98" font-weight="bold">5. Fixed rules</text><text x="770" y="120" font-size="12">R0–R10 decide</text>
+    <rect x="860" y="70" width="120" height="70" rx="12" fill="#DDF0EE" stroke="#0F6B6B" stroke-width="3"/><text x="920" y="98" font-weight="bold">6. Human</text><text x="920" y="120" font-size="12">approve / reject</text>
+    <rect x="860" y="230" width="120" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="920" y="258" font-weight="bold">7. Calendar</text><text x="920" y="280" font-size="12">reminder (.ics)</text>
+    <rect x="700" y="230" width="140" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="770" y="258" font-weight="bold">8. Result email</text><text x="770" y="280" font-size="12">local outbox (.eml)</text>
+    <rect x="530" y="230" width="140" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="600" y="258" font-weight="bold">9. Log sheet</text><text x="600" y="280" font-size="12">every letter (CSV)</text>
+    <rect x="190" y="230" width="310" height="70" rx="12" fill="#FDECEA" stroke="#B42318" stroke-width="2"/><text x="345" y="258" font-weight="bold" fill="#B42318">Errors sheet (CSV)</text><text x="345" y="280" font-size="12">bad input · AI tool down (+ "we will check" email)</text>
+  </g>
+  <g fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)">
+    <path d="M160 105H188"/><path d="M330 105H358"/><path d="M500 105H528"/><path d="M670 105H698"/><path d="M840 105H858"/>
+    <path d="M920 140V228"/><path d="M860 265H842"/><path d="M700 265H672"/>
+  </g>
+  <g fill="none" stroke="#B42318" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)">
+    <path d="M260 140V228"/><path d="M600 140 V180 H420 V228"/>
+  </g>
+  <path d="M430 140 V196 H560 V228" fill="none" stroke="#3F565C" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#a)"/>
+  <text x="440" y="208" font-size="11" fill="#3F565C">duplicate → logged, skipped</text>
+  <path d="M960 140 V200 H640 V228" fill="none" stroke="#3F565C" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#a)"/>
+  <text x="700" y="196" font-size="11" fill="#3F565C">rejected → logged, nothing sent</text>
+  <g font-size="13" fill="#0F2A30">
+    <rect x="20" y="340" width="960" height="200" rx="16" fill="#EEF3F6" stroke="#CFDCE1"/>
+    <text x="40" y="370" font-weight="bold">Why this design</text>
+    <text x="40" y="398">• The AI only extracts facts and must copy the exact words. A fixed check confirms the words are in the letter.</text>
+    <text x="40" y="424">• The outcome comes from the same fixed rule table as the PaperShield app. The AI never decides it.</text>
+    <text x="40" y="450">• A person must press Approve before any reminder or email is made. "AI unsure" is shown in red.</text>
+    <text x="40" y="476">• Every letter ends in the log sheet; every failure in the errors sheet. AI summary only with consent.</text>
+    <text x="40" y="502">• Synthetic data only (@example.com). Emails are saved to a local outbox; nothing is really sent.</text>
+  </g>
+</svg>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1-normal",
+    "title": "Normal bill: AI extracts, rules say Action needed, human approves, reminder + email",
+    "input": { "email": "maria.test@example.com", "aiSummaryConsent": "yes", "letterText": "SAMPLE ONLY - VALLEY LIGHT & WATER CO.\nCustomer Service: 555-0142\nStatement date: October 2, 2026\nAccount number: 4410-2291-0087\nMaria Example\n1200 Sample Street, Los Angeles, CA\nElectric service 09/01 - 09/30 $38.10\nWater service $7.40\nAmount due: $45.50\nPlease pay by October 30, 2026.\nIf payment is not received, a late fee may be added and service may be interrupted.\nPay online at valleylightwater.example or by mail." },
+    "human": "approve",
+    "expect": { "status": "sent", "outcome": "action", "aiUnsure": false, "calendar": true, "email": true }
+  },
+  {
+    "id": "2-missing-data",
+    "title": "Missing data: the letter text is empty",
+    "input": { "email": "maria.test@example.com", "letterText": "" },
+    "expect": { "status": "error-bad-input", "errorStage": "check-input", "email": false }
+  },
+  {
+    "id": "3-wrong-data",
+    "title": "Wrong data: the email address is not an email",
+    "input": { "email": "maria.example.com", "letterText": "SAMPLE ONLY - SUNRISE MUTUAL INSURANCE\nPolicy number: HP-7781-3302\nDear Maria Example,\nYour home insurance policy renews automatically. Your new yearly premium is $612.00, the same as last year. You do not need to do anything. This letter is for your records." },
+    "expect": { "status": "error-bad-input", "errorStage": "check-input", "email": false }
+  },
+  {
+    "id": "4-duplicate",
+    "title": "Duplicate: the same bill from the same person arrives again",
+    "input": { "email": "maria.test@example.com", "aiSummaryConsent": "yes", "letterText": "SAMPLE ONLY - VALLEY LIGHT & WATER CO.\nCustomer Service: 555-0142\nStatement date: October 2, 2026\nAccount number: 4410-2291-0087\nMaria Example\n1200 Sample Street, Los Angeles, CA\nElectric service 09/01 - 09/30 $38.10\nWater service $7.40\nAmount due: $45.50\nPlease pay by October 30, 2026.\nIf payment is not received, a late fee may be added and service may be interrupted.\nPay online at valleylightwater.example or by mail." },
+    "expect": { "status": "duplicate-skipped", "email": false }
+  },
+  {
+    "id": "5-ai-unsure",
+    "title": "AI unsure: amount and date are smudged; rules + human still in control",
+    "input": { "email": "harold.test@example.com", "letterText": "SAMPLE ONLY - CITYWIDE GAS SERVICES\nStatement for Harold Example\nGas service for September\nAmount due: $1?7.?5 (ink smudged)\nPlease pay by Nov?mber ??, 2026.\nQuestions? Call the number on your card.\nThank you for being a customer." },
+    "human": "approve",
+    "expect": { "status": "sent", "aiUnsure": true, "email": true }
+  },
+  {
+    "id": "6-tool-down",
+    "title": "Tool down: the AI service does not answer",
+    "input": { "email": "grace.test@example.com", "simulate": "ai-down", "letterText": "SAMPLE ONLY - CITYWIDE PHARMACY\nOctober 7, 2026\nDear Grace Example,\nWe overcharged you for your last order. A refund of $18.25 will be sent to your card on file. You will receive it in 5 to 7 business days. You do not need to do anything." },
+    "expect": { "status": "error-ai-down", "errorStage": "ai-extract", "email": true }
+  },
+  {
+    "id": "7-human-rejects",
+    "title": "Human rejects: scam letter; the person reviewing says do not send",
+    "input": { "email": "walter.test@example.com", "letterText": "SAMPLE ONLY - FINAL NOTICE\nTAX RESOLUTION DEPARTMENT IRS SERVICES\nURGENT: YOUR TAX ACCOUNT HAS A BALANCE\nAmount due: $1,850.00\nYou must act now. Pay within 24 hours or a warrant for your arrest will be issued and your bank account will be frozen.\nPayment must be made with gift cards or wire transfer only.\nCall 555-0199 immediately and have your Social Security number ready to verify your identity.\nVisit irs-tax-payments.example.com to confirm your account.\nDo not tell anyone about this notice." },
+    "human": "reject",
+    "expect": { "status": "rejected-not-sent", "outcome": "scam", "email": false }
+  }
+]
