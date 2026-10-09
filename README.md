@@ -4,7 +4,7 @@
 The [PaperShield app](https://mai-hakim.github.io/papershield/) works on the phone without AI. This project is its companion: the same decision rules running as an **n8n workflow**, with an AI step that only *extracts facts* and a human who must approve before anything is sent.
 All data is **synthetic**: made-up letters and `@example.com` addresses.
 
-**Demo video:** [docs/demo/papershield-n8n-demo.webm](docs/demo/papershield-n8n-demo.webm). A scam letter is caught, the reviewer rejects it, an "AI unsure" letter is flagged in red, and the errors sheet shows a failed AI call.
+**Demo video:** [docs/demo/papershield-n8n-demo.mp4](docs/demo/papershield-n8n-demo.mp4) (40 s, MP4). Recorded with Playwright, then converted to H.264 MP4 at 1.5× speed with ffmpeg so it plays on iPhone, Android and every desktop browser. A scam letter is caught, the reviewer rejects it, an "AI unsure" letter is flagged in red, and the errors sheet shows a failed AI call.
 
 ![The workflow in n8n](docs/n8n-canvas.png)
 

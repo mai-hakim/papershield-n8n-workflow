@@ -2,3 +2,5 @@ out/
 .env
 node_modules/
 docs/demo/tmp/
+docs/demo/*.webm
+docs/demo/tmp/
